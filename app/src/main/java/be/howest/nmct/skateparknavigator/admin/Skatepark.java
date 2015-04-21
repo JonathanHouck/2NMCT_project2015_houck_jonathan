@@ -29,7 +29,7 @@ public class Skatepark {
         }
     }
 
-    private enum PROVINCE {
+    public enum PROVINCE {
         WESTVLAANDEREN("West-Vlaanderen", 51.038354, 3.03412, 10),
         OOSTVLAANDEREN("Oost-Vlaanderen", 51.036895, 3.8306751, 10),
         ANTWERPEN("Antwerpen", 51.2603851, 4.3577201, 11),
@@ -87,16 +87,16 @@ public class Skatepark {
     private String street;
     private String city;
     private String postcode;
-    private String province;
+    private PROVINCE province;
     private String website;
-    private int capacity;
+    private CAPACITY capacity;
     private boolean indoor;
     private boolean free;
     private double lattitude;
     private double longitude;
     private int zoomlevel;
 
-    public Skatepark(String name, String description, String street, String city, String postcode, String province, String website, int capacity, boolean indoor, boolean free, double lattitude, double longitude, int zoomlevel) {
+    public Skatepark(String name, String description, String street, String city, String postcode, PROVINCE province, String website, CAPACITY capacity, boolean indoor, boolean free, double lattitude, double longitude, int zoomlevel) {
         this.name = name;
         this.description = description;
         this.street = street;
@@ -152,11 +152,11 @@ public class Skatepark {
         this.postcode = postcode;
     }
 
-    public String getProvince() {
+    public PROVINCE getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(PROVINCE province) {
         this.province = province;
     }
 
@@ -168,11 +168,11 @@ public class Skatepark {
         this.website = website;
     }
 
-    public int getCapacity() {
+    public CAPACITY getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(CAPACITY capacity) {
         this.capacity = capacity;
     }
 
