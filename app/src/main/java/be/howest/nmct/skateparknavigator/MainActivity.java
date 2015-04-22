@@ -3,16 +3,9 @@ package be.howest.nmct.skateparknavigator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class MainActivity extends Activity implements MainFragment.OnMainFragmentListener {
 
@@ -51,11 +44,11 @@ public class MainActivity extends Activity implements MainFragment.OnMainFragmen
     }
 
     @Override
-    public void DemandSkateparkOnMap() {
+    public void DemanMapSkatepark() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
-        SkateparkOnMap fragment = new SkateparkOnMap();
-        fragmentTransaction.replace(R.id.container, fragment, "SkateparkOnMap");
+        MapSkateparkFragment fragment = new MapSkateparkFragment();
+        fragmentTransaction.replace(R.id.container, fragment, "MapSkateparkFragment");
         fragmentTransaction.addToBackStack("show_new_skatepark_map");
         fragmentTransaction.commit();
     }

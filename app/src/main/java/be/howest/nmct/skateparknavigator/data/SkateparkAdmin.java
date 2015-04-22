@@ -84,4 +84,25 @@ public class SkateparkAdmin {
         skateparks.add(s3);
         skateparks.add(s4);
     }
+
+    public static List<Skatepark> getSkateparks() {
+        return skateparks;
+    }
+
+    public static Skatepark getSkatepark(String sName) {
+        for (Skatepark skatepark : getSkateparks()) {
+            if (skatepark.getName().equals(sName)) return skatepark;
+        }
+        return null;
+    }
+
+    public static List<Skatepark> getSkateparks(Skatepark.PROVINCE province) {
+        List<Skatepark> selectedSkateparks = new ArrayList<>();
+
+        for (Skatepark skatepark : getSkateparks()) {
+            if (skatepark.getProvince().equals(province)) selectedSkateparks.add(skatepark);
+        }
+
+        return selectedSkateparks;
+    }
 }

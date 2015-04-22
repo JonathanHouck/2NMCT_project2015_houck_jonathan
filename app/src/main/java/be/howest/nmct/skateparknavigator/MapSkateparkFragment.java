@@ -15,9 +15,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SkateparkOnMap extends Fragment implements OnMapReadyCallback{
+public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback{
 
-    public SkateparkOnMap() {
+    public MapSkateparkFragment() {
         // Required empty public constructor
     }
 
