@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity implements MainFragment.OnMainFragmentListener {
+public class MainActivity extends ActionBarActivity implements MainFragment.OnMainFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends Activity implements MainFragment.OnMainFragmen
     }
 
     @Override
-    public void DemanMapSkatepark() {
+    public void DemandMapSkatepark() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
         MapSkateparkFragment fragment = new MapSkateparkFragment();

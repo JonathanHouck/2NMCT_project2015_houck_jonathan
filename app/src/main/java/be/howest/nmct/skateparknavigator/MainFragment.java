@@ -28,7 +28,7 @@ public class MainFragment extends Fragment {
         button_show_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.DemanMapSkatepark();
+                mListener.DemandMapSkatepark();
             }
         });
 
@@ -47,7 +47,7 @@ public class MainFragment extends Fragment {
     }
 
     public interface OnMainFragmentListener {
-        public void DemanMapSkatepark();
+        public void DemandMapSkatepark();
     }
 
 }

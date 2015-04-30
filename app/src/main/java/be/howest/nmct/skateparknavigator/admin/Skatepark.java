@@ -96,6 +96,12 @@ public class Skatepark {
     private double longitude;
     private int zoomlevel;
 
+    public Skatepark(String name, String city, CAPACITY capacity) {
+        this.name = name;
+        this.city = city;
+        this.capacity = capacity;
+    }
+
     public Skatepark(String name, String description, String street, String city, String postcode, PROVINCE province, String website, CAPACITY capacity, boolean indoor, boolean free, double lattitude, double longitude, int zoomlevel) {
         this.name = name;
         this.description = description;
