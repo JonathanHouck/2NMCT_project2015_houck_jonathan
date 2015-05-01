@@ -17,10 +17,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback{
 
+    private static final String EXTRA_LATTITUDE = "be.howest.nmct.skateparknavigator.LATTITUDE";
+    private static final String EXTRA_LONGITUDE = "be.howest.nmct.skateparknavigator.LONGITUDE";
+    private static final String EXTRA_NAME = "be.howest.nmct.skateparknavigator.NAME";
+
     public MapSkateparkFragment() {
         // Required empty public constructor
     }
 
+    public static MapSkateparkFragment newInstance(double dLattitude, double dLongitude, String sName) {
+        MapSkateparkFragment fragment = new MapSkateparkFragment();
+        Bundle bundle = new Bundle();
+        bundle.putDouble(EXTRA_LATTITUDE, dLattitude);
+        bundle.putDouble(EXTRA_LONGITUDE, dLongitude);
+        bundle.putString(EXTRA_NAME, sName);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,12 +51,15 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
-        LatLng latLng = new LatLng(50.81479, 3.21094);
+        Double dLattidue = getArguments().getDouble(EXTRA_LATTITUDE);
+        Double dLongitude = getArguments().getDouble(EXTRA_LONGITUDE);
+
+        LatLng latLng = new LatLng(dLattidue, dLongitude);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
         googleMap.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title("Rampaffairz Skatepark"));
+                .title(getArguments().getString(EXTRA_NAME)));
 
     }
 }

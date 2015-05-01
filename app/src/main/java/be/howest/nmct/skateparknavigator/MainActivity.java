@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity implements MainFragment.OnMainFragmentListener {
+public class MainActivity extends ActionBarActivity implements SkateparksFragment.OnFragmentSkateparksListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +16,10 @@ public class MainActivity extends ActionBarActivity implements MainFragment.OnMa
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment(), "MainFragment")
+                    .add(R.id.container, new SkateparksFragment(), "SkateparksFragment")
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,12 +44,27 @@ public class MainActivity extends ActionBarActivity implements MainFragment.OnMa
     }
 
     @Override
-    public void DemandMapSkatepark() {
+    public void DemandMapSkatepark(double dLattiude, double dLongitude, String sName) {
+        ShowMapSkatepark(dLattiude, dLongitude, sName);
+    }
+
+    public void ShowMapSkatepark(double dLattiude, double dLongitude, String sName) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
-        MapSkateparkFragment fragment = new MapSkateparkFragment();
+        MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(dLattiude, dLongitude, sName);
         fragmentTransaction.replace(R.id.container, fragment, "MapSkateparkFragment");
-        fragmentTransaction.addToBackStack("show_new_skatepark_map");
+        fragmentTransaction.addToBackStack("show_new_map");
         fragmentTransaction.commit();
+    }
+
+    //http://stackoverflow.com/questions/27029998/actionbaractivity-back-button-not-popping-from-backstack
+    @Override
+    public void onBackPressed()
+    {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

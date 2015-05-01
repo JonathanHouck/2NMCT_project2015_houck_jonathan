@@ -13,4 +13,12 @@
         android:id="@+id/button_show_map"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show skateparks"
+        android:id="@+id/button_show_skateparks"
+        android:layout_below="@+id/button_show_map"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

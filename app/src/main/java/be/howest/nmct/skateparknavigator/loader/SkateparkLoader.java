@@ -20,7 +20,6 @@ import be.howest.nmct.skateparknavigator.admin.Skatepark;
 cursor c = (cursor) madapter.getitem(cursor)
 cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);*/
 
-
 /**
  * Created by Jonathan on 22/04/2015.
  */
@@ -33,21 +32,20 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
     private final String[] mColumnNames = new String[] {
             BaseColumns._ID,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME,
+            Contract.SkateparkColumns.COLUMN_SKATEPARK_STREET,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_CITY,
-            Contract.SkateparkColumns.COLUMN_SKATEPARK_CAPACITY,};
+            Contract.SkateparkColumns.COLUMN_SKATEPARK_CAPACITY,
+            Contract.SkateparkColumns.COLUMN_SKATEPARK_LATTITUDE,
+            Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE};
 
     public SkateparkLoader(Context context) {
         super(context);
     }
 
-    public SkateparkLoader(Context context, Skatepark.PROVINCE province) {
-        super(context);
-        this.province = province;
-    }
-
     @Override
     protected void onStartLoading() {
-        super.onStartLoading();
+        //super.onStartLoading();
+
         if (mCursor != null) {
             deliverResult(mCursor);
         }
@@ -60,12 +58,6 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
     public Cursor loadInBackground() {
         if (mCursor == null) {
             loadCursor();
-
-            /*if (province == null) {
-                loadCursor(SkateparkAdmin.getSkateparks());
-            } else {
-                loadCursor(SkateparkAdmin.getSkateparks(this.province));
-            }*/
         }
         return mCursor;
     }
@@ -80,7 +72,7 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
 
             try
             {
-                input = Resources.getSystem().openRawResource(R.raw.skateparks);
+                input = getContext().getResources().openRawResource(R.raw.skateparks);
                 reader = new JsonReader(new InputStreamReader(input, "UTF-8"));
 
                 //json file inlezen (rij per rij)
@@ -89,8 +81,11 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                 {
                     reader.beginObject();
                     String name = "";
+                    String street = "";
                     String city = "";
-                    Skatepark.CAPACITY capacityEnum = Skatepark.CAPACITY.MEDIUM;
+                    int capacity = 0;
+                    double lattitude = 0.0;
+                    double longitude = 0.0;
 
                     while (reader.hasNext()) {
                         String itemName = reader.nextName();
@@ -100,30 +95,23 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                                 if (reader.peek().equals(JsonToken.STRING)) name = reader.nextString();
                                 else reader.skipValue();
                                 break;
+                            case "street":
+                                if (reader.peek().equals(JsonToken.STRING)) street = reader.nextString();
+                                else reader.skipValue();
+                                break;
                             case "city":
                                 if (reader.peek().equals(JsonToken.STRING)) city = reader.nextString();
                                 else reader.skipValue();
                                 break;
                             case "capacity":
-                                if (reader.peek().equals(JsonToken.STRING)) {
-                                    int capacity = reader.nextInt();
-
-                                    switch (capacity) {
-                                        case 1:
-                                            capacityEnum = Skatepark.CAPACITY.SMALL;
-                                            break;
-                                        case 2:
-                                            capacityEnum = Skatepark.CAPACITY.MEDIUM;
-                                            break;
-                                        case 3:
-                                            capacityEnum = Skatepark.CAPACITY.BIG;
-                                            break;
-                                        default:
-                                            capacityEnum = Skatepark.CAPACITY.MEDIUM;
-                                            break;
-                                    }
-                                }
+                                if (reader.peek().equals(JsonToken.NUMBER)) capacity = reader.nextInt();
                                 else reader.skipValue();
+                                break;
+                            case "lattitude":
+                                if (reader.peek().equals(JsonToken.NUMBER)) lattitude = reader.nextDouble();
+                                break;
+                            case "longitude":
+                                if (reader.peek().equals(JsonToken.NUMBER)) longitude = reader.nextDouble();
                                 break;
                             default:
                                 reader.skipValue();
@@ -135,8 +123,11 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                     MatrixCursor.RowBuilder row = cursor.newRow();
                     row.add(id);
                     row.add(name);
+                    row.add(street);
                     row.add(city);
-                    row.add(capacityEnum);
+                    row.add(capacity);
+                    row.add(lattitude);
+                    row.add(longitude);
                     id++;
 
                     reader.endObject();
