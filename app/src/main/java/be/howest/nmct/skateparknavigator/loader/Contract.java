@@ -21,4 +21,11 @@ public class Contract {
         public static final String COLUMN_SKATEPARK_LONGITUDE = "skatepark_longitude";
         public static final String COLUMN_SKATEPARK_ZOOMLEVEL = "skatepark_zoomlevel";
     }
+
+    public interface ProvinceColumns extends BaseColumns {
+        public static final String COLUMN_PROVINCE_NAME = "province_name";
+        public static final String COLUMN_PROVINCE_LATTITUDE = "province_lattitude";
+        public static final String COLUMN_PROVINCE_LONGITUDE = "province_longitude";
+        public static final String COLUMN_PROVINCE_ZOOMLEVEL = "province_zoomlevel";
+    }
 }

@@ -34,6 +34,7 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
             Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_STREET,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_CITY,
+            Contract.SkateparkColumns.COLUMN_SKATEPARK_PROVINCE,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_CAPACITY,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_LATTITUDE,
             Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE};
@@ -83,6 +84,7 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                     String name = "";
                     String street = "";
                     String city = "";
+                    String province = "";
                     int capacity = 0;
                     double lattitude = 0.0;
                     double longitude = 0.0;
@@ -101,6 +103,10 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                                 break;
                             case "city":
                                 if (reader.peek().equals(JsonToken.STRING)) city = reader.nextString();
+                                else reader.skipValue();
+                                break;
+                            case "province":
+                                if (reader.peek().equals(JsonToken.STRING)) province = reader.nextString();
                                 else reader.skipValue();
                                 break;
                             case "capacity":
@@ -125,6 +131,7 @@ public class SkateparkLoader extends AsyncTaskLoader<Cursor> {
                     row.add(name);
                     row.add(street);
                     row.add(city);
+                    row.add(province);
                     row.add(capacity);
                     row.add(lattitude);
                     row.add(longitude);

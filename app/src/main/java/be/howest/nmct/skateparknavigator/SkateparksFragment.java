@@ -110,7 +110,6 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                     mListener.DemandMapSkatepark(cursorSkateparks.getDouble(colnrLattitude), cursorSkateparks.getDouble(colnrLongitude), cursorSkateparks.getString(colnrName));
                 }
             });
-
         }
 
         public int giveResourceIdCapacity(int capacity) {
@@ -126,7 +125,6 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                 }
         }
 
-        //dataset is null --> activitycreated eerst en daarna wordt loader ingeladen, dit moet omgekeer zijn
         @Override
         public int getItemCount() {
             return cursorSkateparks.getCount();

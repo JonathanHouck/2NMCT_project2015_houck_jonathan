@@ -8,4 +8,7 @@
     <string name="name_park">Naam skatepark</string>
     <string name="naam_skatepark">Naam skatepark</string>
     <string name="gemeente">Gemeente</string>
+    <string name="select_province">Selecteer provincie of pin</string>
+    <string name="name_province">Naam provincie</string>
+    <string name="show_map">Toon map</string>
 </resources>
