@@ -11,4 +11,5 @@
     <string name="select_province">Selecteer provincie of pin</string>
     <string name="name_province">Naam provincie</string>
     <string name="show_map">Toon map</string>
+    <string name="sorteer_gemeente">Sorteer op gemeente</string>
 </resources>

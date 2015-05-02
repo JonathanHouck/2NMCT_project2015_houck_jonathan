@@ -24,7 +24,6 @@ import java.util.List;
 import be.howest.nmct.skateparknavigator.admin.Skatepark;
 import be.howest.nmct.skateparknavigator.loader.Contract;
 import be.howest.nmct.skateparknavigator.loader.SkateparkLoader;
-
 public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback {
 
     private static final String EXTRA_LATTITUDE = "be.howest.nmct.skateparknavigator.LATTITUDE";
@@ -99,6 +98,18 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
             googleMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(getArguments().getString(EXTRA_NAME)));
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        //http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
+        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+        if (mapFragment != null) {
+            getFragmentManager().beginTransaction().remove(mapFragment).commit();
         }
     }
 }

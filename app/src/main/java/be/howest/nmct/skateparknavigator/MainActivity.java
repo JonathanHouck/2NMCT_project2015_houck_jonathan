@@ -89,8 +89,19 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
         MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(province);
-        fragmentTransaction.replace(R.id.container, fragment, "MapSkateparkFragment");
-        fragmentTransaction.addToBackStack("show_new_map");
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void ShowSkateparkProvince(Skatepark.PROVINCE province) {
+        dl.closeDrawer(Gravity.LEFT);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
+        SkateparksFragment fragment = SkateparksFragment.newInstance(province);
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

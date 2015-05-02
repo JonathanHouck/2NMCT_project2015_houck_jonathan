@@ -20,5 +20,4 @@
         android:dividerHeight="0dp"
         tools:layout="@layout/fragment_province"
         />
-
 </android.support.v4.widget.DrawerLayout>

@@ -6,12 +6,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class ProvinceFragment extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_province, container, false);
-
+        
         return v;
     }
 
@@ -66,26 +69,26 @@ public class ProvinceFragment extends ListFragment {
             TextView textview_name_province = holder.textview_name_province;
             textview_name_province.setText(province.getName());
 
-            ImageButton button_show_map_province = holder.button_show_map_province;
-            button_show_map_province.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.DemandMapProvince(province);
-                }
-            });
-
             return row;
         }
     }
 
     class ViewHolder {
         public TextView textview_name_province = null;
-        public ImageButton button_show_map_province = null;
+        //public ImageButton button_show_map_province = null;
 
         public ViewHolder (View row) {
             this.textview_name_province = (TextView) row.findViewById(R.id.textview_name_province);
-            this.button_show_map_province = (ImageButton) row.findViewById(R.id.button_show_map_province);
+            //this.button_show_map_province = (ImageButton) row.findViewById(R.id.button_show_map_province);
         }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Skatepark.PROVINCE province = Skatepark.PROVINCE.values()[position];
+        mListener.DemandMapProvince(province);
     }
 
     @Override
