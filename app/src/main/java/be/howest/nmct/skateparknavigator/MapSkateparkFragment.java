@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -111,5 +113,11 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
         if (mapFragment != null) {
             getFragmentManager().beginTransaction().remove(mapFragment).commit();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(MainActivity.fragment_titles[1]);
     }
 }

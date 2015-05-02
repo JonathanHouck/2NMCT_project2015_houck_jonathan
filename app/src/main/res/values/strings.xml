@@ -3,7 +3,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_park">Naam skatepark</string>
     <string name="naam_skatepark">Naam skatepark</string>
@@ -12,4 +12,11 @@
     <string name="name_province">Naam provincie</string>
     <string name="show_map">Toon map</string>
     <string name="sorteer_gemeente">Sorteer op gemeente</string>
+
+    <!--http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/-->
+    <string-array name="title_fragments">
+        <item>Skateparks</item>
+        <item>Map</item>
+        <item>Detail</item>
+    </string-array>
 </resources>

@@ -259,4 +259,10 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
         }
         return newCursor;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(MainActivity.fragment_titles[0]);
+    }
 }

@@ -9,11 +9,15 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +29,18 @@ import be.howest.nmct.skateparknavigator.loader.SkateparkLoader;
 public class MainActivity extends ActionBarActivity implements SkateparksFragment.OnFragmentSkateparksListener, ProvinceFragment.OnFragmentProvinceListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     public static List<Skatepark> skateparks = new ArrayList<>();
+
     private DrawerLayout dl;
+    public static String[] fragment_titles;
+
+    Boolean mStateSearch = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        fragment_titles = getResources().getStringArray(R.array.title_fragments);
+
         setContentView(R.layout.activity_main);
         getLoaderManager().initLoader(0, null, this);
 
@@ -39,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
                     .commit();
         }
 
+        fragment_titles = getResources().getStringArray(R.array.title_fragments);
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
@@ -46,6 +58,14 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //http://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
+        //als ik dit doet werkt de search niet meer als ik verander van fragment en terugkeer
+        /*if (!mStateSearch) {
+            MenuItem item = menu.findItem(R.id.action_search);
+            item.setVisible(false);
+        }*/
+
         return true;
     }
 
@@ -54,6 +74,7 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -70,6 +91,9 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     }
 
     public void ShowMapSkatepark(double dLattiude, double dLongitude, String sName) {
+        mStateSearch = false;
+        invalidateOptionsMenu();
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
         MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(dLattiude, dLongitude, sName);
@@ -84,22 +108,14 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     }
 
     public void ShowMapProvince(Skatepark.PROVINCE province) {
+        mStateSearch = false;
+        invalidateOptionsMenu();
+
         dl.closeDrawer(Gravity.LEFT);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
         MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(province);
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-    private void ShowSkateparkProvince(Skatepark.PROVINCE province) {
-        dl.closeDrawer(Gravity.LEFT);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
-        SkateparksFragment fragment = SkateparksFragment.newInstance(province);
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
