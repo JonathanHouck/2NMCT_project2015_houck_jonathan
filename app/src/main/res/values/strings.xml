@@ -13,9 +13,13 @@
     <string name="show_map">Toon map</string>
     <string name="sort_city">Sorteer op gemeente</string>
     <string name="description">In dit vernieuwde skatepark vind je een piramide, een curb, ramps, een funbox enzovoort. Er is redelijk wat ruimte om te bewegen en de ondergrond is ideaal voor wieltjes. Een fijne afwisseling met het Keizerspark 10 minuutjes daarvandaan.</string>
-    <string name="adres">Adres</string>
+    <string name="adres">Adres:</string>
     <string name="Straat">Straat</string>
     <string name="postcode">Postcode</string>
+    <string name="indoor">- Indoor</string>
+    <string name="price">- Gratis</string>
+    <string name="capacity_detail">- Klein skatepark</string>
+    <string name="website">Website</string>
 
     <!--http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/-->
     <string-array name="title_fragments">

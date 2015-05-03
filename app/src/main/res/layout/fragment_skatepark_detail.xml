@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     tools:context="be.howest.nmct.skateparknavigator.SkateparkDetailFragment">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,18 +11,28 @@
         android:id="@+id/textView_name_detail"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/website"
+        android:id="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         />
 
     <View
         android:layout_below="@+id/textView_name_detail"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#cecece"/>
+        android:background="#cecece"
+        android:id="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,6 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         />
@@ -42,14 +52,69 @@
         android:layout_below="@+id/textView_description"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#cecece"/>
+        android:background="#cecece"
+        android:id="@+id/textView3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/adres"
-        android:id="@+id/adres"
+        android:text="@string/Straat"
+        android:id="@+id/textView_street_detail"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:layout_below="@+id/textView_description"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/postcode"
+        android:id="@+id/textView_postcode"
+        android:layout_below="@+id/textView_street_detail"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city"
+        android:id="@+id/textView_city_detail"
+        android:layout_below="@+id/textView_description"
+        android:layout_alignTop="@id/textView_postcode"
+        android:layout_toEndOf="@+id/textView_postcode"
+        android:layout_marginBottom="16dp"
+        />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="52.57dp"
+        android:background="@drawable/map_pin"
+        android:id="@+id/imageButton_map_pin_detail"
+        android:layout_below="@+id/textView_description"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_below="@+id/textView_postcode"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#cecece"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price"
+        android:id="@+id/textView_price"
+        android:layout_below="@+id/textView_city_detail"
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
         android:paddingStart="16dp"
@@ -59,31 +124,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Straat"
-        android:id="@+id/street_detail"
-        android:layout_below="@+id/adres"
+        android:text="@string/indoor"
+        android:id="@+id/textView_indoor"
+        android:layout_below="@+id/textView_price"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:paddingEnd="16dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/postcode"
-        android:id="@+id/textView_postcode"
-        android:layout_below="@+id/street_detail"
+        android:text="@string/capacity_detail"
+        android:id="@+id/textView_capacity_detail"
+        android:layout_below="@+id/textView_indoor"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:paddingEnd="16dp"
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/city"
-        android:id="@+id/city_detail"
-        android:layout_below="@+id/textView_description"
-        android:layout_alignTop="@id/textView_postcode"
-        android:layout_toEndOf="@+id/textView_postcode" />
+    <!--<View
+        android:layout_below="@+id/textView_capacity_detail"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#cecece"
+        android:id="@+id/textView"
+        />-->
+
 </RelativeLayout>
