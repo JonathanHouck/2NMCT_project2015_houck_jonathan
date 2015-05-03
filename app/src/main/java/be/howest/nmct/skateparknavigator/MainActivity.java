@@ -61,10 +61,12 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
 
         //http://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
         //als ik dit doet werkt de search niet meer als ik verander van fragment en terugkeer
-        /*if (!mStateSearch) {
-            MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.action_search);
+        if (!mStateSearch) {
             item.setVisible(false);
-        }*/
+        } else {
+            item.setVisible(true);
+        }
 
         return true;
     }
