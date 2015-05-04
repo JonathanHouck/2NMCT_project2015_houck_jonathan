@@ -191,6 +191,8 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
         //http://stackoverflow.com/questions/18438890/menuitemcompat-getactionview-always-returns-null
         inflater.inflate(R.menu.menu_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem.setVisible(true);
+
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -33,8 +33,6 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     private DrawerLayout dl;
     public static String[] fragment_titles;
 
-    Boolean mStateSearch = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,23 +50,6 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
 
         fragment_titles = getResources().getStringArray(R.array.title_fragments);
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        //http://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
-        //als ik dit doet werkt de search niet meer als ik verander van fragment en terugkeer
-        MenuItem item = menu.findItem(R.id.action_search);
-        if (!mStateSearch) {
-            item.setVisible(false);
-        } else {
-            item.setVisible(true);
-        }
-
-        return true;
     }
 
     @Override
@@ -93,9 +74,6 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     }
 
     public void ShowMapSkatepark(double dLattiude, double dLongitude, String sName) {
-        mStateSearch = false;
-        invalidateOptionsMenu();
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
         MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(dLattiude, dLongitude, sName);
@@ -110,9 +88,6 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     }
 
     public void ShowMapProvince(Skatepark.PROVINCE province) {
-        mStateSearch = false;
-        invalidateOptionsMenu();
-
         dl.closeDrawer(Gravity.LEFT);
 
         FragmentManager fragmentManager = getFragmentManager();
