@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/website"
-        android:id="@+id/button"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="16dp"
+        android:id="@+id/button_website"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="12dp"
         />
 
@@ -91,16 +91,29 @@
         android:layout_marginBottom="16dp"
         />
 
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="52.57dp"
-        android:background="@drawable/map_pin"
-        android:id="@+id/imageButton_map_pin_detail"
+    <!--http://stackoverflow.com/questions/10403604/android-imagebutton-how-to-have-a-clickable-area-that-is-larger-than-the-image-i-->
+    <FrameLayout
+        android:id="@+id/button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_below="@+id/textView_description"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        />
+        android:layout_alignParentEnd="true">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="52.57dp"
+            android:background="@drawable/map_pin"
+            android:id="@+id/imageButton_map_pin_detail"
+            android:duplicateParentState="true"
+            android:clickable="false"
+            android:focusable="false"
+            />
+
+    </FrameLayout>
 
     <View
         android:layout_below="@+id/textView_postcode"
@@ -145,13 +158,4 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         />
-
-    <!--<View
-        android:layout_below="@+id/textView_capacity_detail"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#cecece"
-        android:id="@+id/textView"
-        />-->
-
 </RelativeLayout>

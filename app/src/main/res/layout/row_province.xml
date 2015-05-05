@@ -15,12 +15,4 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
-
-    <!--<ImageButton
-        android:layout_width="21dp"
-        android:layout_height="36.8dp"
-        android:background="@drawable/map_pin"
-        android:text="@string/show_map"
-        android:id="@+id/button_show_map_province"
-        android:layout_alignParentEnd="true" />-->
 </RelativeLayout>

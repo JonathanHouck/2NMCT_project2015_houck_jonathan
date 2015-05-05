@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -117,7 +118,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
 
             cursorSkateparks.moveToPosition(position);
 
-            int colnr1 = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);
+            final int colnr1 = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);
             int colnr2 = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_CITY);
             int colnr3 = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_CAPACITY);
 
@@ -139,6 +140,13 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                     int colnrLongitude = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE);
 
                     mListener.DemandMapSkatepark(cursorSkateparks.getDouble(colnrLattitude), cursorSkateparks.getDouble(colnrLongitude), cursorSkateparks.getString(colnrName));
+                }
+            });
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.DemandSkateparkDetail(cursorSkateparks.getString(colnr1));
                 }
             });
         }
@@ -165,7 +173,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             public TextView mTextView_name = null;
             public TextView mTextView_city = null;
             public ImageView mImageView_capacity = null;
-            public ImageButton mButton_google_maps = null;
+            public FrameLayout mButton_google_maps = null;
 
             public SkateparkViewHolder(View itemView) {
                 super(itemView);
@@ -173,7 +181,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                 mTextView_name = (TextView) itemView.findViewById(R.id.textView_name);
                 mTextView_city = (TextView) itemView.findViewById(R.id.textView_city);
                 mImageView_capacity = (ImageView) itemView.findViewById(R.id.imageView_capacity);
-                mButton_google_maps = (ImageButton) itemView.findViewById(R.id.button_google_maps);
+                mButton_google_maps = (FrameLayout) itemView.findViewById(R.id.button_google_maps_layout);
             }
         }
     }
@@ -231,6 +239,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
 
     public interface OnFragmentSkateparksListener {
         public void DemandMapSkatepark(double dLattidue, double dLongtiude, String sName);
+        public void DemandSkateparkDetail(String sName);
     }
 
     private Cursor filterCursorOnCity(String city)

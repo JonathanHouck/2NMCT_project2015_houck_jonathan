@@ -2,6 +2,7 @@ package be.howest.nmct.skateparknavigator.admin;
 
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created by Jonathan on 17/04/2015.
@@ -56,13 +57,27 @@ public class Skatepark {
     private boolean free;
     private double lattitude;
     private double longitude;
-    private int zoomlevel;
 
-    public Skatepark(String name, double lattitude, double longitude, String province) {
+    public Skatepark(String name, String description, String street, String city, String postcode, String province, String website, int capacity, boolean indoor, boolean free, double lattitude, double longitude) {
         this.name = name;
+        this.description = description;
+        this.street = street;
+        this.city = city;
+        this.postcode = postcode;
+        this.province = province;
+        this.website = website;
+        this.capacity = capacity;
+        this.indoor = indoor;
+        this.free = free;
         this.lattitude = lattitude;
         this.longitude = longitude;
-        this.province = province;
+    }
+
+    public static Skatepark getSkateparkFromName(String sName, List<Skatepark> skateparks) {
+        for (Skatepark skatepark : skateparks) {
+            if (skatepark.getName().equals(sName)) return skatepark;
+        }
+        return null;
     }
 
     public String getName() {
@@ -111,9 +126,5 @@ public class Skatepark {
 
     public double getLongitude() {
         return longitude;
-    }
-
-    public int getZoomlevel() {
-        return zoomlevel;
     }
 }

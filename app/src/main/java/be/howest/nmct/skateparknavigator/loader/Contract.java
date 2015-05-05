@@ -19,7 +19,6 @@ public class Contract {
         public static final String COLUMN_SKATEPARK_FREE = "skatepark_free";
         public static final String COLUMN_SKATEPARK_LATTITUDE = "skatepark_lattitude";
         public static final String COLUMN_SKATEPARK_LONGITUDE = "skatepark_longitude";
-        public static final String COLUMN_SKATEPARK_ZOOMLEVEL = "skatepark_zoomlevel";
     }
 
     public interface ProvinceColumns extends BaseColumns {

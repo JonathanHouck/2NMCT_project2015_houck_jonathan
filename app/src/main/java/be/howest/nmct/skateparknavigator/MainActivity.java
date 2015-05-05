@@ -73,6 +73,20 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
         ShowMapSkatepark(dLattiude, dLongitude, sName);
     }
 
+    @Override
+    public void DemandSkateparkDetail(String sName) {
+        ShowSkateparkDetail(sName);
+    }
+
+    private void ShowSkateparkDetail(String sName) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
+        SkateparkDetailFragment fragment = SkateparkDetailFragment.newInstance(sName);
+        fragmentTransaction.replace(R.id.container, fragment, "SkateparkDetailFragment");
+        fragmentTransaction.addToBackStack("show_skatepark_detail");
+        fragmentTransaction.commit();
+    }
+
     public void ShowMapSkatepark(double dLattiude, double dLongitude, String sName) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
@@ -118,11 +132,35 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
         while (c.moveToNext()) {
             int colnr1 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);
-            int colnr2 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LATTITUDE);
-            int colnr3 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE);
-            int colnr4 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_PROVINCE);
+            int colnr2 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_DESCRIPTION);
+            int colnr3 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_STREET);
+            int colnr4 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_CITY);
+            int colnr5 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_POSTCODE);
+            int colnr6 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_PROVINCE);
+            int colnr7 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_WEBSITE);
+            int colnr8 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_CAPACITY);
+            int colnr9 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_INDOOR);
+            int colnr10 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_FREE);
+            int colnr11 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LATTITUDE);
+            int colnr12 = c.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE);
 
-            Skatepark sp = new Skatepark(c.getString(colnr1), c.getDouble(colnr2), c.getDouble(colnr3), c.getString(colnr4));
+            //http://stackoverflow.com/questions/4088080/android-sqlite-get-boolean-from-database
+            boolean bIndoor = c.getInt(colnr9) > 0;
+            boolean bFree = c.getInt(colnr10) > 0;
+
+            Skatepark sp = new Skatepark(
+                    c.getString(colnr1),
+                    c.getString(colnr2),
+                    c.getString(colnr3),
+                    c.getString(colnr4),
+                    c.getString(colnr5),
+                    c.getString(colnr6),
+                    c.getString(colnr7),
+                    c.getInt(colnr8),
+                    bIndoor,
+                    bFree,
+                    c.getDouble(colnr11),
+                    c.getDouble(colnr12));
             skateparks.add(sp);
         }
     }
