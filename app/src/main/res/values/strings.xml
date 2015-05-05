@@ -24,7 +24,7 @@
     <!--http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/-->
     <string-array name="title_fragments">
         <item>Skateparks</item>
-        <item>Map</item>
-        <item>Detail</item>
+        <item>Map:</item>
+        <item>Detail:</item>
     </string-array>
 </resources>

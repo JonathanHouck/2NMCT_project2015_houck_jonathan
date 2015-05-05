@@ -26,7 +26,7 @@ import be.howest.nmct.skateparknavigator.admin.Skatepark;
 import be.howest.nmct.skateparknavigator.loader.Contract;
 import be.howest.nmct.skateparknavigator.loader.SkateparkLoader;
 
-public class MainActivity extends ActionBarActivity implements SkateparksFragment.OnFragmentSkateparksListener, ProvinceFragment.OnFragmentProvinceListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends ActionBarActivity implements SkateparksFragment.OnFragmentSkateparksListener, ProvinceFragment.OnFragmentProvinceListener, SkateparkDetailFragment.OnFragmentSkateparkDetailListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     public static List<Skatepark> skateparks = new ArrayList<>();
 
@@ -69,8 +69,8 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
     }
 
     @Override
-    public void DemandMapSkatepark(double dLattiude, double dLongitude, String sName) {
-        ShowMapSkatepark(dLattiude, dLongitude, sName);
+    public void DemandMapSkatepark(String sName) {
+        ShowMapSkatepark(sName);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
         fragmentTransaction.commit();
     }
 
-    public void ShowMapSkatepark(double dLattiude, double dLongitude, String sName) {
+    public void ShowMapSkatepark(String sName) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction  fragmentTransaction = fragmentManager.beginTransaction();
-        MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(dLattiude, dLongitude, sName);
+        MapSkateparkFragment fragment = MapSkateparkFragment.newInstance(sName);
         fragmentTransaction.replace(R.id.container, fragment, "MapSkateparkFragment");
         fragmentTransaction.addToBackStack("show_new_map");
         fragmentTransaction.commit();

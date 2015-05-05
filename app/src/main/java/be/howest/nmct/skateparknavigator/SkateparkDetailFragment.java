@@ -18,6 +18,7 @@ import be.howest.nmct.skateparknavigator.admin.Skatepark;
 public class SkateparkDetailFragment extends Fragment {
 
     private static final String EXTRA_NAME = "be.howest.nmct.skateparknavigator.NAME";
+    private OnFragmentSkateparkDetailListener mListener;
 
     public SkateparkDetailFragment() {
         // Required empty public constructor
@@ -41,7 +42,6 @@ public class SkateparkDetailFragment extends Fragment {
         final Skatepark skatepark = Skatepark.getSkateparkFromName(sName, MainActivity.skateparks);
 
         ViewHolder holder = new ViewHolder(v);
-        holder.textView_name_detail.setText(skatepark.getName());
 
         holder.button_website.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +54,15 @@ public class SkateparkDetailFragment extends Fragment {
         holder.textView_street_detail.setText(skatepark.getStreet());
         holder.textView_postcode.setText(skatepark.getPostcode());
         holder.textView_city_detail.setText(skatepark.getCity());
-        holder.imageButton_map_pin_detail.setImageResource(R.drawable.map_pin);
+        holder.imageButton_map_pin_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.DemandMapSkatepark(skatepark.getName());
+            }
+        });
 
-        if (skatepark.isFree()) holder.textView_price.setText("- Gratis");
-        else holder.textView_price.setText("- Betalend");
-
-        if (skatepark.isIndoor()) holder.textView_indoor.setText("- Indoor");
-        else holder.textView_indoor.setText("- Outdoor");
+        holder.textView_price.setText(getPrice(skatepark));
+        holder.textView_indoor.setText(getIndoorOrOutdoor(skatepark));
 
         holder.textView_capacity_detail.setText(giveCapacity(skatepark.getCapacity()));
 
@@ -73,21 +75,30 @@ public class SkateparkDetailFragment extends Fragment {
         startActivity(browser);
     }
 
-    public String giveCapacity(int capacity) {
+    private String getPrice(Skatepark skatepark) {
+        if (skatepark.isFree()) return "- Gratis";
+        else return "- Betalend";
+    }
+
+    private String getIndoorOrOutdoor(Skatepark skatepark) {
+        if (skatepark.isIndoor()) return "- Indoor";
+        else return "- Outdoor";
+    }
+
+    private String giveCapacity(int capacity) {
         switch (capacity) {
             case 1:
-                return "Klein skatepark";
+                return "- Klein skatepark";
             case 2:
-                return "Middelgroot skatepark";
+                return "- Middelgroot skatepark";
             case 3:
-                return "Groot skatepark";
+                return "- Groot skatepark";
             default:
-                return "Grootte niet gevonden";
+                return "- Grootte niet gevonden";
         }
     }
 
     class ViewHolder {
-        public TextView textView_name_detail = null;
         public Button button_website = null;
         public TextView textView_description = null;
         public TextView textView_street_detail = null;
@@ -99,7 +110,6 @@ public class SkateparkDetailFragment extends Fragment {
         public TextView textView_capacity_detail = null;
 
         public ViewHolder (View row) {
-            this.textView_name_detail = (TextView) row.findViewById(R.id.textView_name_detail);
             this.button_website = (Button) row.findViewById(R.id.button_website);
             this.textView_description = (TextView) row.findViewById(R.id.textView_description);
             this.textView_street_detail = (TextView) row.findViewById(R.id.textView_street_detail);
@@ -110,5 +120,28 @@ public class SkateparkDetailFragment extends Fragment {
             this.textView_indoor = (TextView) row.findViewById(R.id.textView_indoor);
             this.textView_capacity_detail = (TextView) row.findViewById(R.id.textView_capacity_detail);
         }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentSkateparkDetailListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public interface OnFragmentSkateparkDetailListener {
+        public void DemandMapSkatepark(String sName);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        String sName = getArguments().getString(EXTRA_NAME);
+        getActivity().setTitle(MainActivity.fragment_titles[2] + " " + sName);
     }
 }

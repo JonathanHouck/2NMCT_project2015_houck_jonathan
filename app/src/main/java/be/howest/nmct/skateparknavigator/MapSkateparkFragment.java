@@ -21,8 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import be.howest.nmct.skateparknavigator.admin.Skatepark;
 public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback {
 
-    private static final String EXTRA_LATTITUDE = "be.howest.nmct.skateparknavigator.LATTITUDE";
-    private static final String EXTRA_LONGITUDE = "be.howest.nmct.skateparknavigator.LONGITUDE";
+
     private static final String EXTRA_NAME = "be.howest.nmct.skateparknavigator.NAME";
     private static final String EXTRA_PROVINCE = "be.howest.nmct.skateparknavigator.PROVINCE";
 
@@ -32,11 +31,9 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
         // Required empty public constructor
     }
 
-    public static MapSkateparkFragment newInstance(double dLattitude, double dLongitude, String sName) {
+    public static MapSkateparkFragment newInstance(String sName) {
         MapSkateparkFragment fragment = new MapSkateparkFragment();
         Bundle bundle = new Bundle();
-        bundle.putDouble(EXTRA_LATTITUDE, dLattitude);
-        bundle.putDouble(EXTRA_LONGITUDE, dLongitude);
         bundle.putString(EXTRA_NAME, sName);
         fragment.setArguments(bundle);
         return fragment;
@@ -112,15 +109,16 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
 
         //anders enkel kaar tonen van dat skatepark
         } else {
-            Double dLattidue = getArguments().getDouble(EXTRA_LATTITUDE);
-            Double dLongitude = getArguments().getDouble(EXTRA_LONGITUDE);
 
-            LatLng latLng = new LatLng(dLattidue, dLongitude);
+            String sName = getArguments().getString(EXTRA_NAME);
+            Skatepark skatepark = Skatepark.getSkateparkFromName(sName, MainActivity.skateparks);
+
+            LatLng latLng = new LatLng(skatepark.getLattitude(), skatepark.getLongitude());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
             googleMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .title(getArguments().getString(EXTRA_NAME)));
+                    .title(sName));
         }
     }
 
@@ -131,14 +129,21 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
         //http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-android
         //enkel noodzakelijk voor api 21, anders foutmelding
         if (mMapFragment != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getChildFragmentManager().beginTransaction().remove(mMapFragment).commit();
+            //http://stackoverflow.com/questions/12450024/can-not-perform-this-action-after-onsaveinstancestate-why-am-i-getting-this
+            getChildFragmentManager().beginTransaction().remove(mMapFragment).commitAllowingStateLoss();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(MainActivity.fragment_titles[1]);
+        getActivity().setTitle(MainActivity.fragment_titles[1] + " " + getNameOrProvince());
+    }
+
+    private String getNameOrProvince() {
+        Skatepark.PROVINCE province = (Skatepark.PROVINCE) getArguments().getSerializable(EXTRA_PROVINCE);
+        if (province != null) return province.getName();
+        else return getArguments().getString(EXTRA_NAME);
     }
 
     @Override

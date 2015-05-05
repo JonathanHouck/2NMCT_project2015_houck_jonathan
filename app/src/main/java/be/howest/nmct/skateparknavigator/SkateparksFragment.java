@@ -33,8 +33,6 @@ import be.howest.nmct.skateparknavigator.loader.SkateparkLoader;
 
 public class SkateparksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String EXTRA_PROVINCE = "be.howest.nmct.skateparknavigator.PROVINCE";
-
     private OnFragmentSkateparksListener mListener;
 
     private RecyclerView.Adapter mAdapter;
@@ -54,14 +52,6 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
 
     public SkateparksFragment() {
         // Required empty public constructor
-    }
-
-    public static SkateparksFragment newInstance(Skatepark.PROVINCE province) {
-        SkateparksFragment fragment = new SkateparksFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_PROVINCE, province);
-        fragment.setArguments(bundle);
-        return fragment;
     }
 
     @Override
@@ -136,10 +126,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                     cursorSkateparks.moveToPosition(position);
 
                     int colnrName = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);
-                    int colnrLattitude = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LATTITUDE);
-                    int colnrLongitude = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_LONGITUDE);
-
-                    mListener.DemandMapSkatepark(cursorSkateparks.getDouble(colnrLattitude), cursorSkateparks.getDouble(colnrLongitude), cursorSkateparks.getString(colnrName));
+                    mListener.DemandMapSkatepark(cursorSkateparks.getString(colnrName));
                 }
             });
 
@@ -151,7 +138,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             });
         }
 
-        public int giveResourceIdCapacity(int capacity) {
+        private int giveResourceIdCapacity(int capacity) {
             switch (capacity) {
                 case 1:
                     return R.mipmap.capacity_1;
@@ -238,7 +225,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
     }
 
     public interface OnFragmentSkateparksListener {
-        public void DemandMapSkatepark(double dLattidue, double dLongtiude, String sName);
+        public void DemandMapSkatepark(String sName);
         public void DemandSkateparkDetail(String sName);
     }
 
