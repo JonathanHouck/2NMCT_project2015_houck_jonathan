@@ -1,0 +1,153 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="be.howest.nmct.skateparknavigator.SkateparkDetailFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:id="@+id/textView_description"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#cecece"
+            android:id="@+id/line1"
+            android:layout_marginTop="200dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/website"
+            android:id="@+id/button_website"
+            android:layout_below="@+id/line1"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            />
+
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Straat"
+            android:id="@+id/textView_street_detail"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/postcode"
+            android:id="@+id/textView_postcode"
+            android:layout_below="@+id/textView_street_detail"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            android:id="@+id/textView_city_detail"
+            android:layout_alignTop="@id/textView_postcode"
+            android:layout_toEndOf="@+id/textView_postcode"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--http://stackoverflow.com/questions/10403604/android-imagebutton-how-to-have-a-clickable-area-that-is-larger-than-the-image-i-->
+        <FrameLayout
+            android:id="@+id/button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_alignParentEnd="true">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="52.57dp"
+                android:background="@drawable/map_pin"
+                android:id="@+id/imageButton_map_pin_detail"
+                android:duplicateParentState="true"
+                android:clickable="false"
+                android:focusable="false"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:id="@+id/textView_price"
+            android:layout_below="@+id/button_layout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/indoor"
+            android:id="@+id/textView_indoor"
+            android:layout_below="@+id/textView_price"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/capacity_detail"
+            android:id="@+id/textView_capacity_detail"
+            android:layout_below="@+id/textView_indoor"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#cecece"
+            android:id="@+id/line2"
+            android:layout_marginTop="200dp"
+            />
+    </RelativeLayout>
+</LinearLayout>
