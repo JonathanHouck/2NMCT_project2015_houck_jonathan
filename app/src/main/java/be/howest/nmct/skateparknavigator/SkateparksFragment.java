@@ -117,6 +117,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             viewHolder.mImageView_capacity.setImageResource(giveResourceIdCapacity(cursorSkateparks.getInt(colnr3)));
 
             viewHolder.mButton_google_maps.setTag(cursorSkateparks.getPosition());
+            viewHolder.itemView.setTag(cursorSkateparks.getPosition());
 
             viewHolder.mButton_google_maps.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,14 +126,16 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                     int position = (Integer) viewHolder.mButton_google_maps.getTag();
                     cursorSkateparks.moveToPosition(position);
 
-                    int colnrName = cursorSkateparks.getColumnIndex(Contract.SkateparkColumns.COLUMN_SKATEPARK_NAME);
-                    mListener.DemandMapSkatepark(cursorSkateparks.getString(colnrName));
+                    mListener.DemandMapSkatepark(cursorSkateparks.getString(colnr1));
                 }
             });
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = (Integer) viewHolder.itemView.getTag();
+                    cursorSkateparks.moveToPosition(position);
+
                     mListener.DemandSkateparkDetail(cursorSkateparks.getString(colnr1));
                 }
             });
