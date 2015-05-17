@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Skatepark {
     public enum PROVINCE {
-        WESTVLAANDEREN("West-Vlaanderen", 51.038354, 3.03412, 10),
+        WESTVLAANDEREN("West-Vlaanderen", 51.038354, 3.03412, 9),
         OOSTVLAANDEREN("Oost-Vlaanderen", 51.036895, 3.8306751, 10),
         ANTWERPEN("Antwerpen", 51.2603851, 4.3577201, 11),
         BRUSSEL("Brussel", 50.854975, 4.3753899, 12),

@@ -116,14 +116,14 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             viewHolder.mTextView_city.setText(cursorSkateparks.getString(colnr2));
             viewHolder.mImageView_capacity.setImageResource(giveResourceIdCapacity(cursorSkateparks.getInt(colnr3)));
 
-            viewHolder.mButton_google_maps.setTag(cursorSkateparks.getPosition());
+            viewHolder.mImageButton_google_maps.setTag(cursorSkateparks.getPosition());
             viewHolder.itemView.setTag(cursorSkateparks.getPosition());
 
-            viewHolder.mButton_google_maps.setOnClickListener(new View.OnClickListener() {
+            viewHolder.mImageButton_google_maps.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    int position = (Integer) viewHolder.mButton_google_maps.getTag();
+                    int position = (Integer) viewHolder.mImageButton_google_maps.getTag();
                     cursorSkateparks.moveToPosition(position);
 
                     mListener.DemandMapSkatepark(cursorSkateparks.getString(colnr1));
@@ -163,7 +163,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             public TextView mTextView_name = null;
             public TextView mTextView_city = null;
             public ImageView mImageView_capacity = null;
-            public FrameLayout mButton_google_maps = null;
+            public ImageButton mImageButton_google_maps = null;
 
             public SkateparkViewHolder(View itemView) {
                 super(itemView);
@@ -171,7 +171,7 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
                 mTextView_name = (TextView) itemView.findViewById(R.id.textView_name);
                 mTextView_city = (TextView) itemView.findViewById(R.id.textView_city);
                 mImageView_capacity = (ImageView) itemView.findViewById(R.id.imageView_capacity);
-                mButton_google_maps = (FrameLayout) itemView.findViewById(R.id.button_google_maps_layout);
+                mImageButton_google_maps = (ImageButton) itemView.findViewById(R.id.imageButton_google_maps);
             }
         }
     }

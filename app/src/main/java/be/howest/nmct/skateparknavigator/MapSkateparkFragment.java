@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -102,8 +103,10 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
                     LatLng latLngSkatepark = new LatLng(skatepark.getLattitude(), skatepark.getLongitude());
 
                     googleMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_pin))
                             .position(latLngSkatepark)
-                            .title(skatepark.getName()));
+                            .title(skatepark.getName())
+                            .snippet(getIndoorOrOutdoor(skatepark) + " - " + getPrice(skatepark) + " - " + giveCapacity(skatepark.getCapacity())));
                 }
             }
 
@@ -117,8 +120,33 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
             googleMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_pin))
                     .position(latLng)
-                    .title(sName));
+                    .title(sName)
+                    .snippet(getIndoorOrOutdoor(skatepark) + " - " + getPrice(skatepark) + " - " + giveCapacity(skatepark.getCapacity())));
+        }
+    }
+
+    private String getPrice(Skatepark skatepark) {
+        if (skatepark.isFree()) return "gratis";
+        else return "betalend";
+    }
+
+    private String getIndoorOrOutdoor(Skatepark skatepark) {
+        if (skatepark.isIndoor()) return "indoor";
+        else return "outdoor";
+    }
+
+    private String giveCapacity(int capacity) {
+        switch (capacity) {
+            case 1:
+                return "klein";
+            case 2:
+                return "middelgroot";
+            case 3:
+                return "groot";
+            default:
+                return "grootte niet gevonden";
         }
     }
 

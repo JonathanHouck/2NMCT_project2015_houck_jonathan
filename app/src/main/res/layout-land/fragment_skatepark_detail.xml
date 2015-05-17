@@ -83,34 +83,21 @@
             android:layout_marginBottom="16dp"
             />
 
-        <!--http://stackoverflow.com/questions/10403604/android-imagebutton-how-to-have-a-clickable-area-that-is-larger-than-the-image-i-->
-        <FrameLayout
-            android:id="@+id/button_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:layout_alignParentEnd="true">
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="52.57dp"
-                android:background="@drawable/map_pin"
-                android:id="@+id/imageButton_map_pin_detail"
-                android:duplicateParentState="true"
-                android:clickable="false"
-                android:focusable="false"
-                />
-        </FrameLayout>
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imageButton_map_pin_detail"
+            android:background="@mipmap/map_pin"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/price"
             android:id="@+id/textView_price"
-            android:layout_below="@+id/button_layout"
+            android:layout_below="@+id/imageButton_map_pin_detail"
             android:layout_alignParentStart="true"
             android:layout_marginTop="16dp"
             android:paddingStart="16dp"

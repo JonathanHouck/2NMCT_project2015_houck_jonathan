@@ -64,7 +64,7 @@ public class SkateparkDetailFragment extends Fragment {
         holder.textView_price.setText(getPrice(skatepark));
         holder.textView_indoor.setText(getIndoorOrOutdoor(skatepark));
 
-        holder.textView_capacity_detail.setText(giveCapacity(skatepark.getCapacity()));
+        holder.textView_capacity_detail.setText(giveCapacity(skatepark));
 
         return v;
     }
@@ -85,8 +85,8 @@ public class SkateparkDetailFragment extends Fragment {
         else return "- Outdoor";
     }
 
-    private String giveCapacity(int capacity) {
-        switch (capacity) {
+    private String giveCapacity(Skatepark skatepark) {
+        switch (skatepark.getCapacity()) {
             case 1:
                 return "- Klein skatepark";
             case 2:
