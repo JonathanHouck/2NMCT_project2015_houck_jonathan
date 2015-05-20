@@ -149,18 +149,9 @@ public class MainActivity extends ActionBarActivity implements SkateparksFragmen
             boolean bFree = c.getInt(colnr10) > 0;
 
             Skatepark sp = new Skatepark(
-                    c.getString(colnr1),
-                    c.getString(colnr2),
-                    c.getString(colnr3),
-                    c.getString(colnr4),
-                    c.getString(colnr5),
-                    c.getString(colnr6),
-                    c.getString(colnr7),
-                    c.getInt(colnr8),
-                    bIndoor,
-                    bFree,
-                    c.getDouble(colnr11),
-                    c.getDouble(colnr12));
+                    c.getString(colnr1), c.getString(colnr2), c.getString(colnr3), c.getString(colnr4),
+                    c.getString(colnr5), c.getString(colnr6), c.getString(colnr7), c.getInt(colnr8),
+                    bIndoor, bFree, c.getDouble(colnr11), c.getDouble(colnr12));
             skateparks.add(sp);
         }
     }

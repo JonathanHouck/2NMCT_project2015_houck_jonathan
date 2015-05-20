@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import be.howest.nmct.skateparknavigator.admin.Skatepark;
 public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback {
 
-
     private static final String EXTRA_NAME = "be.howest.nmct.skateparknavigator.NAME";
     private static final String EXTRA_PROVINCE = "be.howest.nmct.skateparknavigator.PROVINCE";
 
@@ -53,7 +52,6 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         //http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-android
         if (view != null) {
@@ -76,10 +74,8 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
     private FragmentManager getFragmentManagerCorrect() {
         FragmentManager fm;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-
             fm = getFragmentManager();
         } else {
-
             fm = getChildFragmentManager();
         }
         return fm;
@@ -103,7 +99,7 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
                     LatLng latLngSkatepark = new LatLng(skatepark.getLattitude(), skatepark.getLongitude());
 
                     googleMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_pin))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin))
                             .position(latLngSkatepark)
                             .title(skatepark.getName())
                             .snippet(getIndoorOrOutdoor(skatepark) + " - " + getPrice(skatepark) + " - " + giveCapacity(skatepark.getCapacity())));
@@ -120,7 +116,7 @@ public class MapSkateparkFragment extends Fragment implements OnMapReadyCallback
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
             googleMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_pin))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin))
                     .position(latLng)
                     .title(sName)
                     .snippet(getIndoorOrOutdoor(skatepark) + " - " + getPrice(skatepark) + " - " + giveCapacity(skatepark.getCapacity())));

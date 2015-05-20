@@ -122,7 +122,6 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
             viewHolder.mImageButton_google_maps.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     int position = (Integer) viewHolder.mImageButton_google_maps.getTag();
                     cursorSkateparks.moveToPosition(position);
 
@@ -144,13 +143,13 @@ public class SkateparksFragment extends Fragment implements LoaderManager.Loader
         private int giveResourceIdCapacity(int capacity) {
             switch (capacity) {
                 case 1:
-                    return R.mipmap.capacity_1;
+                    return R.drawable.capacity_1;
                 case 2:
-                    return R.mipmap.capacity_2;
+                    return R.drawable.capacity_2;
                 case 3:
-                    return R.mipmap.capacity_3;
+                    return R.drawable.capacity_3;
                 default:
-                    return R.mipmap.capacity_1;
+                    return R.drawable.capacity_1;
                 }
         }
 
